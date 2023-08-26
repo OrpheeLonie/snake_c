@@ -1,4 +1,4 @@
-project(test)
+project(Snake)
 
 set(SOURCES main.c)
 
