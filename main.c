@@ -4,32 +4,7 @@
 #include <unistd.h>
 #include <fcntl.h>
 
-int kbhit(void)
-{
-  struct termios oldt, newt;
-  int ch;
-  int oldf;
-
-  tcgetattr(STDIN_FILENO, &oldt);
-  newt = oldt;
-  newt.c_lflag &= ~(ICANON | ECHO);
-  tcsetattr(STDIN_FILENO, TCSANOW, &newt);
-  oldf = fcntl(STDIN_FILENO, F_GETFL, 0);
-  fcntl(STDIN_FILENO, F_SETFL, oldf | O_NONBLOCK);
-
-  ch = getchar();
-
-  tcsetattr(STDIN_FILENO, TCSANOW, &oldt);
-  fcntl(STDIN_FILENO, F_SETFL, oldf);
-
-  if(ch != EOF)
-  {
-    ungetc(ch, stdin);
-    return 1;
-  }
-
-  return 0;
-}
+#include "src/utils.h"
 
 int main()
 {
@@ -43,22 +18,13 @@ int main()
     tcsetattr(STDIN_FILENO, TCSANOW, &newt);
     */
 
-    /*
-    struct termios term;
-    cfmakeraw(&term);
-    */
-
-    while(1)
-    {
-        if(kbhit())
-        {
-            char c = getchar();
-            if (c == 'a')
-                printf("This is a 'a'\n");
-            else
-                printf("This is not a 'a'\n");
-        }
-    }
+    system("clear");
+    gotoXY(7, 5);
+    printf("abc");
+    gotoXY(2, 8);
+    printf("abc");
+    // printf("%c[%d;%df", 0x1B, 4, 52);
+    printf("def");
 
     return 0;
 }
