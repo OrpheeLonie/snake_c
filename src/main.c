@@ -4,27 +4,26 @@
 #include <unistd.h>
 #include <fcntl.h>
 
-#include "src/utils.h"
+#include "utils.h"
 
 int main()
 {
-    /*
     struct termios oldt, newt;
 
     tcgetattr(STDIN_FILENO, &oldt);
     newt = oldt;
     newt.c_lflag &= ~(ECHO | ICANON);
 
-    tcsetattr(STDIN_FILENO, TCSANOW, &newt);
-    */
+    // tcsetattr(STDIN_FILENO, TCSANOW, &newt);
 
-    system("clear");
-    gotoXY(7, 5);
-    printf("abc");
-    gotoXY(2, 8);
-    printf("abc");
-    // printf("%c[%d;%df", 0x1B, 4, 52);
-    printf("def");
+    // system("clear");
+    printf("\e[2J");
+    for (int i = 0; i < 10; i++)
+    {
+        gotoXY(20+i, 10);
+        printf("#\n");
+        usleep(200000);
+    }
 
     return 0;
 }
