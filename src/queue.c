@@ -2,7 +2,7 @@
 
 #include <stdlib.h>
 
-Queue *new_queue(unsigned int max_size)
+Queue *queue_new(unsigned int max_size)
 {
     Queue *q = malloc(sizeof(struct Queue));
     if (q == NULL)
@@ -23,8 +23,13 @@ Queue *new_queue(unsigned int max_size)
     return q;
 }
 
-void delete_queue(Queue *q)
+void queue_delete(Queue *q)
 {
     free(q->array);
     free(q);
+}
+
+int queue_push(Queue *q, int val)
+{
+    return 0;
 }

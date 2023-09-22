@@ -9,7 +9,7 @@ void test_create_queue()
     unsigned int max_size = 10;
 
     // When
-    Queue *q = new_queue(max_size);
+    Queue *q = queue_new(max_size);
 
     // Then
     assert(q != NULL);
@@ -19,7 +19,17 @@ void test_create_queue()
     assert(q->head == 0);
     assert(q->tail == 0);
 
-    delete_queue(q);
+    queue_delete(q);
+}
+
+void test_push_queue()
+{
+    // Given
+    Queue *q = queue_new(10);
+
+    // When
+    queue_push(q, 1);
+    // Then
 }
 
 int main(void)

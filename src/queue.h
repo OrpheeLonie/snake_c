@@ -10,7 +10,8 @@ typedef struct Queue
     unsigned int tail;
 } Queue;
 
-Queue *new_queue(unsigned int max_size);
-void delete_queue(Queue *q);
+Queue *queue_new(unsigned int max_size);
+void queue_delete(Queue *q);
+int queue_push(Queue *q, int val);
 
 #endif // QUEUE_H
