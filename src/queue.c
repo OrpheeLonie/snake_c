@@ -31,5 +31,12 @@ void queue_delete(Queue *q)
 
 int queue_push(Queue *q, int val)
 {
+    if (q->size >= q->max_size)
+        return 1;
+
+    q->array[q->head] = val;
+    q->head = (q->head+1) % q->max_size;
+    q->size++;
+
     return 0;
 }
