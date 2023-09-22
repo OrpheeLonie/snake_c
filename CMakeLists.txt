@@ -2,7 +2,8 @@ project(Snake)
 
 cmake_minimum_required(VERSION 3.14)
 
-set(CMAKE_CXX_FLAG -Wall -Werror -Wextra)
+add_compile_options(-Wall -Werror -Wextra)
+add_link_options(-lasan)
 
 # Subdirectories
 add_subdirectory(src)

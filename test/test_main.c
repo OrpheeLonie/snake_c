@@ -6,7 +6,7 @@
 void test_create_queue()
 {
     // Given
-    int max_size = 10;
+    unsigned int max_size = 10;
 
     // When
     Queue *q = new_queue(max_size);
