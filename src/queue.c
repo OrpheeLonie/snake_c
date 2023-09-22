@@ -25,5 +25,6 @@ Queue *new_queue(unsigned int max_size)
 
 void delete_queue(Queue *q)
 {
+    free(q->array);
     free(q);
 }
