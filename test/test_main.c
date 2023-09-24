@@ -66,10 +66,50 @@ void test_multiple_push_queue()
     queue_delete(q);
 }
 
+void test_pop_queue()
+{
+    // Given
+    Queue *q1 = queue_new(10);
+    Queue *q2 = queue_new(10);
+    int input[10] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+
+    // When
+    int output1[10];
+    int output2[10];
+    for (int i = 0; i < 10; i++)
+    {
+        queue_push(q1, input[i]);
+        output1[i] = queue_pop(q1);
+
+        queue_push(q2, input[i]);
+    }
+    for (int i = 0; i < 10; i++)
+    {
+        output2[i] = queue_pop(q2);
+    }
+
+    // Then
+    for (int i = 0; i < 10; i++)
+    {
+        assert(input[i] == output1[i]);
+        assert(input[i] == output2[i]);
+    }
+    assert(q1->size == 0);
+    assert(q1->head == 0);
+    assert(q1->tail == 0);
+    assert(q2->size == 0);
+    assert(q2->head == 0);
+    assert(q2->tail == 0);
+
+    queue_delete(q1);
+    queue_delete(q2);
+}
+
 int main(void)
 {
     test_create_queue();
     test_push_queue();
     test_multiple_push_queue();
+    test_pop_queue();
     return 0;
 }

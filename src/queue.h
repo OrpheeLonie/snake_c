@@ -13,5 +13,6 @@ typedef struct Queue
 Queue *queue_new(unsigned int max_size);
 void queue_delete(Queue *q);
 int queue_push(Queue *q, int val);
+int queue_pop(Queue *q);
 
 #endif // QUEUE_H

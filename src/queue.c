@@ -40,3 +40,15 @@ int queue_push(Queue *q, int val)
 
     return 0;
 }
+
+int queue_pop(Queue *q)
+{
+    if (q->size == 0)
+        return 0;
+
+    int output = q->array[q->tail];
+    q->tail = (q->tail+1) % q->max_size;
+    q->size--;
+
+    return output;
+}
