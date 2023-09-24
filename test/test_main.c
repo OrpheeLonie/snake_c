@@ -40,6 +40,30 @@ void test_push_queue()
     queue_delete(q);
 }
 
+void test_multiple_push_queue()
+{
+    // Given
+    Queue *q = queue_new(10);
+    int expected_output[11] = {0};
+    expected_output[10] = 1;
+
+    // When
+    int output[11];
+    for (int i = 0; i < 11; i++)
+    {
+        output[i] = queue_push(q, i);
+    }
+
+    // Then
+    assert(q->size == 10);
+    assert(q->head == 0);
+    assert(q->tail == 0);
+    for (int i = 0; i < 11; i++)
+        assert(expected_output[i] == output[i]);
+    for (int i = 0; i < 10; i++)
+        assert(q->array[i] == i);
+}
+
 int main(void)
 {
     test_create_queue();
