@@ -62,11 +62,14 @@ void test_multiple_push_queue()
         assert(expected_output[i] == output[i]);
     for (int i = 0; i < 10; i++)
         assert(q->array[i] == i);
+
+    queue_delete(q);
 }
 
 int main(void)
 {
     test_create_queue();
     test_push_queue();
+    test_multiple_push_queue();
     return 0;
 }
