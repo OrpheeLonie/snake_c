@@ -105,11 +105,40 @@ void test_pop_queue()
     queue_delete(q2);
 }
 
+void test_peak_queue()
+{
+    // Given
+    Queue *q = queue_new(10);
+    int input[10] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+    for (int i = 0; i < 10; i++)
+        queue_push(q, input[i]);
+
+    // When
+    int output[10];
+    for (int i = 0; i < 10; i++)
+    {
+        output[i] = queue_peak(q);
+        queue_pop(q);
+    }
+
+    // Then
+    for (int i = 0; i < 10; i++)
+    {
+        assert(input[i] == output[i]);
+    }
+    assert(q->size == 0);
+    assert(q->head == 0);
+    assert(q->tail == 0);
+
+    queue_delete(q);
+}
+
 int main(void)
 {
     test_create_queue();
     test_push_queue();
     test_multiple_push_queue();
     test_pop_queue();
+    test_peak_queue();
     return 0;
 }

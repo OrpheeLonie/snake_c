@@ -52,3 +52,8 @@ int queue_pop(Queue *q)
 
     return output;
 }
+
+int queue_peak(Queue *q)
+{
+    return q->array[q->tail];
+}
