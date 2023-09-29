@@ -1,23 +1,14 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <termios.h>
 #include <unistd.h>
-#include <fcntl.h>
 
 #include "utils.h"
 #include "queue.h"
 
 int main()
 {
-    struct termios oldt, newt;
-
-    tcgetattr(STDIN_FILENO, &oldt);
-    newt = oldt;
-    newt.c_lflag &= ~(ECHO | ICANON);
-    tcsetattr(STDIN_FILENO, TCSANOW, &newt);
-
-    int oldf = fcntl(STDIN_FILENO, F_GETFL, 0);
-    fcntl(STDIN_FILENO, F_SETFL, oldf | O_NONBLOCK);
+    set_terminal_flags();
+    hide_cursor();
 
     Queue *q_x = queue_new(10);
     Queue *q_y = queue_new(10);
