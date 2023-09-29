@@ -21,7 +21,7 @@ void snake_delete(Snake *s)
     free(s);
 }
 
-static void update_next_position(Snake *s)
+void snake_step_on_apple(Snake *s)
 {
     switch(s->dir)
     {
@@ -38,11 +38,7 @@ static void update_next_position(Snake *s)
             s->next_x++;
             break;
     }
-}
 
-void snake_step_on_apple(Snake *s)
-{
-    update_next_position(s);
     queue_push(s->q_x, s->next_x);
     queue_push(s->q_y, s->next_y);
 }
