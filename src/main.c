@@ -5,6 +5,7 @@
 #include <fcntl.h>
 
 #include "utils.h"
+#include "queue.h"
 
 int main()
 {
@@ -18,9 +19,33 @@ int main()
     int oldf = fcntl(STDIN_FILENO, F_GETFL, 0);
     fcntl(STDIN_FILENO, F_SETFL, oldf | O_NONBLOCK);
 
-    // fcntl(STDIN_FILENO, O_NONBLOCK);
+    Queue *q_x = queue_new(10);
+    Queue *q_y = queue_new(10);
 
-    // system("clear");
+    clear_screen();
+    for (int x = 5; x < 11; x++)
+    {
+        queue_push(q_x, x);
+        queue_push(q_y, 10);
+        gotoXY(x, 10);
+        printf("#\n");
+    }
+
+    int x = 10;
+    int y = 10;
+    while (1)
+    {
+        gotoXY(queue_pop(q_x), queue_pop(q_y));
+        printf(" \n");
+
+        x++;
+        queue_push(q_x, x);
+        queue_push(q_y, y);
+        gotoXY(x, y);
+        printf("#\n");
+        usleep(200000);
+    }
+
     printf("\e[2J");
     for (int i = 0; i < 10; i++)
     {
