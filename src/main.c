@@ -8,6 +8,7 @@
 #include "utils.h"
 
 #define SPEED 50000
+#define BOARD_SIDE 30
 
 char read_char()
 {
@@ -26,6 +27,30 @@ void new_apple(int *x, int *y)
     printf("@");
 }
 
+void draw_board()
+{
+    for (int i = 0; i <= BOARD_SIDE; i++)
+    {
+        gotoXY(i, 0);
+        printf("*");
+        gotoXY(i, BOARD_SIDE);
+        printf("*");
+    }
+
+    for (int i = 1; i <= BOARD_SIDE - 1; i++)
+    {
+        gotoXY(0, i);
+        printf("*");
+        gotoXY(BOARD_SIDE, i);
+        printf("*");
+    }
+}
+
+int is_outside(int x, int y)
+{
+    return x == 0 || y == 0 || x == BOARD_SIDE || y == BOARD_SIDE;
+}
+
 int main()
 {
     set_terminal_flags();
@@ -34,6 +59,7 @@ int main()
 
     srand(time(NULL));
 
+    draw_board();
     int apple_x, apple_y;
     Snake *s = snake_new(100, 10, 10);
     for (int i = 0; i < 5; i++)
@@ -48,7 +74,7 @@ int main()
 
     char c;
     int x, y;
-    while ((c = read_char()) != 'q')
+    while ((c = read_char()) != 'q' && !is_outside(s->pos_x, s->pos_y))
     {
         if (c != EOF)
             snake_set_direction(s, c);
@@ -73,6 +99,10 @@ int main()
         usleep(SPEED);
     }
 
+    gotoXY(0, BOARD_SIDE + 2);
+    printf("You died");
+
+    printf("\e[?25h\n");
     snake_delete(s);
 
     return 0;
