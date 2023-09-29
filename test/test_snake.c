@@ -95,11 +95,37 @@ void test_snake_step()
     snake_delete(s);
 }
 
+void test_set_direction()
+{
+    // Given
+    Snake *s = snake_new(10, 10, 10);
+    char given_char[9] = {'w', 's', 'a', 'a', 'd', 's', 'w', 'd', 'a'};
+    enum direction expected_direction[9] = {UP,   UP,   LEFT,  LEFT, LEFT,
+                                            DOWN, DOWN, RIGHT, RIGHT};
+    enum direction output_direction[9];
+
+    // When
+    for (int i = 0; i < 9; i++)
+    {
+        snake_set_direction(s, given_char[i]);
+        output_direction[i] = s->dir;
+    }
+
+    // Then
+    for (int i = 0; i < 9; i++)
+    {
+        assert(expected_direction[i] == output_direction[i]);
+    }
+
+    snake_delete(s);
+}
+
 int main(void)
 {
     test_create_snake();
     test_snake_step_on_apple();
     test_snake_step();
+    test_set_direction();
 
     return 0;
 }
