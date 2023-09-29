@@ -20,7 +20,8 @@ typedef struct Snake
     enum direction dir;
 } Snake;
 
-Snake *snake_new(unsigned int max_size);
+Snake *snake_new(unsigned int max_size, int x, int y);
 void snake_delete(Snake *s);
+void snake_step_on_apple(Snake *s);
 
 #endif // SNAKE_H
