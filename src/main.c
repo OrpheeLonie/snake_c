@@ -4,53 +4,52 @@
 
 #include "utils.h"
 #include "queue.h"
+#include "snake.h"
+
+#define SPEED 50000
+
+char read_char()
+{
+    char c = EOF, c_tmp;
+    while ((c_tmp = getc(stdin)) != EOF)
+        c = c_tmp;
+    return c;
+}
 
 int main()
 {
     set_terminal_flags();
     hide_cursor();
-
-    Queue *q_x = queue_new(10);
-    Queue *q_y = queue_new(10);
-
     clear_screen();
-    for (int x = 5; x < 11; x++)
-    {
-        queue_push(q_x, x);
-        queue_push(q_y, 10);
-        gotoXY(x, 10);
-        printf("#\n");
-    }
 
-    int x = 10;
-    int y = 10;
-    while (1)
+    Snake *s = snake_new(100, 10, 10);
+    for (int i = 0; i < 5; i++)
     {
-        gotoXY(queue_pop(q_x), queue_pop(q_y));
+        snake_step_on_apple(s);
+        gotoXY(s->pos_x, s->pos_y);
+        printf("#");
+    }
+    fflush(stdout);
+    usleep(SPEED);
+
+    char c;
+    int x, y;
+    while ((c = read_char()) != 'q')
+    {
+        if (c != EOF)
+            snake_set_direction(s, c);
+
+        snake_step(s, &x, &y);
+        gotoXY(s->pos_x, s->pos_y);
+        printf("#");
+        gotoXY(x, y);
         printf(" ");
 
-        x++;
-        queue_push(q_x, x);
-        queue_push(q_y, y);
-        gotoXY(x, y);
-        printf("#");
         fflush(stdout);
-        usleep(200000);
+        usleep(SPEED);
     }
 
-    printf("\e[2J");
-    for (int i = 0; i < 10; i++)
-    {
-        gotoXY(20+i, 10);
-        printf("#\n");
-        usleep(200000);
-        char c = getc(stdin);
-        if (c != EOF)
-        {
-            gotoXY(i, 0);
-            printf("%c\n", c);
-        }
-    }
+    snake_delete(s);
 
     return 0;
 }
