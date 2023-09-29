@@ -1,6 +1,7 @@
 set(LIB_SOURCES
   queue.c
   utils.c
+  snake.c
 )
 
 set(MAIN_SOURCES
@@ -10,6 +11,7 @@ set(MAIN_SOURCES
 set(HEADERS
   queue.h
   utils.h
+  snake.h
 )
 
 add_library(snake_lib STATIC ${LIB_SOURCES} ${HEADERS})

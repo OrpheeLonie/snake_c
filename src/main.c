@@ -27,13 +27,14 @@ int main()
     while (1)
     {
         gotoXY(queue_pop(q_x), queue_pop(q_y));
-        printf(" \n");
+        printf(" ");
 
         x++;
         queue_push(q_x, x);
         queue_push(q_y, y);
         gotoXY(x, y);
-        printf("#\n");
+        printf("#");
+        fflush(stdout);
         usleep(200000);
     }
 
