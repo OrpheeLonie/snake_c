@@ -15,4 +15,4 @@ add_test(NAME check_queue COMMAND check_queue)
 add_test(NAME check_snake COMMAND check_snake)
 
 add_custom_target(check COMMAND ${CMAKE_CTEST_COMMAND}
-                  DEPENDS check_queue)
+                  DEPENDS check_queue check_snake)
