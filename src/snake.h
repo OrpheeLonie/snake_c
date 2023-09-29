@@ -11,4 +11,7 @@ typedef struct Snake
     int next_y;
 } Snake;
 
+Snake *snake_new(unsigned int max_size);
+void snake_delete(Snake *s);
+
 #endif // SNAKE_H
