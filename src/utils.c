@@ -6,7 +6,7 @@
 
 void gotoXY(int x, int y)
 {
-    printf("\e[%d;%dH", y, x*2);
+    printf("\e[%d;%dH", y+1, (x+1)*2);
 }
 
 void clear_screen()
