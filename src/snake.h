@@ -15,8 +15,8 @@ typedef struct Snake
 {
     Queue *q_x;
     Queue *q_y;
-    int next_x;
-    int next_y;
+    int pos_x;
+    int pos_y;
     enum direction dir;
 } Snake;
 

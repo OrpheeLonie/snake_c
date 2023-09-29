@@ -18,8 +18,8 @@ void test_create_snake()
     assert(s->q_x != NULL);
     assert(s->q_y != NULL);
     assert(s->dir == RIGHT);
-    assert(s->next_x == x);
-    assert(s->next_y == y);
+    assert(s->pos_x == x);
+    assert(s->pos_y == y);
 
     queue_push(s->q_x, 0);
 
@@ -46,17 +46,17 @@ void test_snake_step_on_apple()
     snake_step_on_apple(s4);
 
     // Then
-    assert(s1->next_x == x);
-    assert(s1->next_y == y - 1);
+    assert(s1->pos_x == x);
+    assert(s1->pos_y == y - 1);
     assert(s1->q_x->size == 1);
-    assert(queue_peak(s1->q_x) == s1->next_x);
+    assert(queue_peak(s1->q_x) == s1->pos_x);
     assert(s1->q_y->size == 1);
-    assert(queue_peak(s1->q_y) == s1->next_y);
-    assert(s2->next_y == y + 1);
-    assert(s3->next_x == x - 1);
-    assert(s3->next_y == y);
-    assert(s4->next_x == x + 1);
-    assert(s4->next_y == y);
+    assert(queue_peak(s1->q_y) == s1->pos_y);
+    assert(s2->pos_y == y + 1);
+    assert(s3->pos_x == x - 1);
+    assert(s3->pos_y == y);
+    assert(s4->pos_x == x + 1);
+    assert(s4->pos_y == y);
 
     snake_delete(s1);
     snake_delete(s2);
