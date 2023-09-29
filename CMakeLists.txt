@@ -11,6 +11,6 @@ add_subdirectory(test)
 
 # Unit tests
 enable_testing()
-add_test(NAME check_snake COMMAND check_snake)
+add_test(NAME check_queue COMMAND check_queue)
 add_custom_target(check COMMAND ${CMAKE_CTEST_COMMAND}
-                  DEPENDS check_snake)
+                  DEPENDS check_queue)
