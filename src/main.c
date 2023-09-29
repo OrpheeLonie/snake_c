@@ -9,6 +9,9 @@
 
 #define SPEED 50000
 #define BOARD_SIDE 30
+#define APPLE_SYMBOL "@"
+#define SNAKE_SYMBOL "#"
+#define BOARD_SYMBOL "*"
 
 char read_char()
 {
@@ -24,7 +27,7 @@ void new_apple(int *x, int *y)
     *y = rand() % 10;
 
     gotoXY(*x, *y);
-    printf("@");
+    printf(APPLE_SYMBOL);
 }
 
 void draw_board()
@@ -32,17 +35,17 @@ void draw_board()
     for (int i = 0; i <= BOARD_SIDE; i++)
     {
         gotoXY(i, 0);
-        printf("*");
+        printf(BOARD_SYMBOL);
         gotoXY(i, BOARD_SIDE);
-        printf("*");
+        printf(BOARD_SYMBOL);
     }
 
     for (int i = 1; i <= BOARD_SIDE - 1; i++)
     {
         gotoXY(0, i);
-        printf("*");
+        printf(BOARD_SYMBOL);
         gotoXY(BOARD_SIDE, i);
-        printf("*");
+        printf(BOARD_SYMBOL);
     }
 }
 
@@ -66,7 +69,7 @@ int main()
     {
         snake_step_on_apple(s);
         gotoXY(s->pos_x, s->pos_y);
-        printf("#");
+        printf(SNAKE_SYMBOL);
     }
     new_apple(&apple_x, &apple_y);
     fflush(stdout);
@@ -91,9 +94,9 @@ int main()
             printf(" ");
         }
         gotoXY(apple_x, apple_y);
-        printf("@");
+        printf(APPLE_SYMBOL);
         gotoXY(s->pos_x, s->pos_y);
-        printf("#");
+        printf(SNAKE_SYMBOL);
 
         fflush(stdout);
         usleep(SPEED);
