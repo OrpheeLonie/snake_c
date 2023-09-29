@@ -44,7 +44,7 @@ int queue_push(Queue *q, int val)
 int queue_pop(Queue *q)
 {
     if (q->size == 0)
-        return 0;
+        return -1;
 
     int output = q->array[q->tail];
     q->tail = (q->tail+1) % q->max_size;
