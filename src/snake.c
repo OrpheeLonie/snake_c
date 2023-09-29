@@ -7,6 +7,7 @@ Snake *snake_new(unsigned int max_size)
     Snake *s = malloc(sizeof(Snake));
     s->q_x = queue_new(max_size);
     s->q_y = queue_new(max_size);
+    s->dir = RIGHT;
 
     return s;
 }

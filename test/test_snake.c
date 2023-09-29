@@ -15,6 +15,7 @@ void test_create_snake()
     assert(s != NULL);
     assert(s->q_x != NULL);
     assert(s->q_y != NULL);
+    assert(s->dir == RIGHT);
 
     snake_delete(s);
 }
