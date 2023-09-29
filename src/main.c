@@ -1,10 +1,11 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 #include <unistd.h>
 
-#include "utils.h"
 #include "queue.h"
 #include "snake.h"
+#include "utils.h"
 
 #define SPEED 50000
 
@@ -16,12 +17,24 @@ char read_char()
     return c;
 }
 
+void new_apple(int *x, int *y)
+{
+    *x = rand() % 10;
+    *y = rand() % 10;
+
+    gotoXY(*x, *y);
+    printf("@");
+}
+
 int main()
 {
     set_terminal_flags();
     hide_cursor();
     clear_screen();
 
+    srand(time(NULL));
+
+    int apple_x, apple_y;
     Snake *s = snake_new(100, 10, 10);
     for (int i = 0; i < 5; i++)
     {
@@ -29,6 +42,7 @@ int main()
         gotoXY(s->pos_x, s->pos_y);
         printf("#");
     }
+    new_apple(&apple_x, &apple_y);
     fflush(stdout);
     usleep(SPEED);
 
@@ -39,11 +53,21 @@ int main()
         if (c != EOF)
             snake_set_direction(s, c);
 
-        snake_step(s, &x, &y);
+        if (s->pos_x == apple_x && s->pos_y == apple_y)
+        {
+            new_apple(&apple_x, &apple_y);
+            snake_step_on_apple(s);
+        }
+        else
+        {
+            snake_step(s, &x, &y);
+            gotoXY(x, y);
+            printf(" ");
+        }
+        gotoXY(apple_x, apple_y);
+        printf("@");
         gotoXY(s->pos_x, s->pos_y);
         printf("#");
-        gotoXY(x, y);
-        printf(" ");
 
         fflush(stdout);
         usleep(SPEED);
