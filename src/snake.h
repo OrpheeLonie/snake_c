@@ -23,5 +23,6 @@ typedef struct Snake
 Snake *snake_new(unsigned int max_size, int x, int y);
 void snake_delete(Snake *s);
 void snake_step_on_apple(Snake *s);
+void snake_step(Snake *s, int *x, int *y);
 
 #endif // SNAKE_H

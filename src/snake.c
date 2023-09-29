@@ -21,6 +21,10 @@ void snake_delete(Snake *s)
     free(s);
 }
 
+/*
+ * Make the snake step forward without poping from th queues
+ * *s: the snake
+ */
 void snake_step_on_apple(Snake *s)
 {
     switch(s->dir)
@@ -41,4 +45,17 @@ void snake_step_on_apple(Snake *s)
 
     queue_push(s->q_x, s->pos_x);
     queue_push(s->q_y, s->pos_y);
+}
+
+/*
+ * Make the snake go forward and return the position of the tail
+ * *s: the snake
+ * *x: the position where the tail was
+ * *y: the position where the tail was
+ */
+void snake_step(Snake *s, int *x, int *y)
+{
+    snake_step_on_apple(s);
+    *x = queue_pop(s->q_x);
+    *y = queue_pop(s->q_y);
 }

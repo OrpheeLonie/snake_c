@@ -64,10 +64,42 @@ void test_snake_step_on_apple()
     snake_delete(s4);
 }
 
+void test_snake_step()
+{
+    // Given
+    Snake *s = snake_new(10, 10, 10);
+    snake_step_on_apple(s);
+    snake_step_on_apple(s);
+    enum direction dirs[5] = {UP, LEFT, DOWN, DOWN, DOWN};
+    int expected_x[5] = {11, 12, 12, 11, 11};
+    int expected_y[5] = {10, 10, 9, 9, 10};
+
+    // When
+    int output_x[5];
+    int output_y[5];
+    for (int i = 0; i < 5; i++)
+    {
+        s->dir = dirs[i];
+        snake_step(s, output_x+i, output_y+i);
+        assert(s->q_x->size == 2);
+        assert(s->q_x->size == 2);
+    }
+
+    // Then
+    for (int i = 0; i < 5; i++)
+    {
+        assert(expected_x[i] == output_x[i]);
+        assert(expected_y[i] == output_y[i]);
+    }
+
+    snake_delete(s);
+}
+
 int main(void)
 {
     test_create_snake();
     test_snake_step_on_apple();
+    test_snake_step();
 
     return 0;
 }
